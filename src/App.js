@@ -8,8 +8,6 @@ import {Init} from './pages/Init'
 
 function App() {
   const url = new URL(document.location)
-  console.log("*url -> " + JSON.stringify(url))
-  console.log("search params -> " + url.searchParams)
   return (
     <div className="App">
       <Switch>

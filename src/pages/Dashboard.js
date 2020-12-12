@@ -15,7 +15,7 @@ export class Dashboard extends Component {
   }
 
   renderMatches() {
-    const {teams, matches} = this.state
+    //const {teams, matches} = this.state
     return <div>Matches</div>
   }
 

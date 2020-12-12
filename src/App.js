@@ -7,7 +7,6 @@ import {Dashboard} from './pages/Dashboard'
 import {Init} from './pages/Init'
 
 function App() {
-  const url = new URL(document.location)
   return (
     <div className="App">
       <Switch>

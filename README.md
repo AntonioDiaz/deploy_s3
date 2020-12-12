@@ -1,5 +1,13 @@
-# Getting Started with Create React App
+# POC: Deploy a React App on AWS S3
 
+![s3-depl](https://github.com/AntonioDiaz/deploy_s3/workflows/s3-depl/badge.svg?branch=master)
+
+https://dev.to/nobleobioma/deploy-a-react-app-to-amazon-s3-using-github-actions-51e
+
+https://medium.com/@wolovim/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af
+
+
+## Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

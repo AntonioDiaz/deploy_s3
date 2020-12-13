@@ -18,6 +18,35 @@ export class Dashboard extends Component {
     return ""
   }
 
+  updateMatchScore(row, column, teams) {
+    //validations
+    if (row<column) {
+      let team01Str = this.teamsName(row, teams)
+      let team02Str = this.teamsName(column, teams)
+      let msg = `Resultado del partido entre \n[${team01Str} y ${team02Str}]`
+      var newScore = prompt(msg, "-")
+      console.log("newScore " + newScore)
+      if (newScore==null || !newScore.match(/^\d-\d$/)) {
+        alert("formato incorrercto")
+      } else {
+        let score01 = newScore.split("-")[0]
+        let score02 = newScore.split("-")[1]
+        let url = `https://zmq6ovxgw7.execute-api.eu-west-3.amazonaws.com/2020/score?team01=${row}&team02=${column}&score01=${score01}&score02=${score02}`
+        fetch(url, {
+          method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          alert("Resultado actualizado")
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });        
+      }
+    }
+  }
+
   renderMatches() {
     const {teams, matches} = this.state
     if (Array.isArray(teams)) {
@@ -27,14 +56,17 @@ export class Dashboard extends Component {
           <thead>
             <tr key={-1}>
               <th>-</th>
-              {teams.map((e, index) => <th>{this.formatTeamName(e)}</th> )}
+              {teams.map((e, index) => <th key={index}>{this.formatTeamName(e)}</th> )}
             </tr>
           </thead>
           <tbody>
               {matches.map((matchesSubArray, index) => <tr key={index}>
               <td key={-1}>{this.teamsName(index, teams)}</td>
                 {matchesSubArray.map((match, subIndex)=>{ 
-                  return <td key={subIndex}>{match}</td>
+                  return (
+                    <td key={subIndex} onDoubleClick={()=>this.updateMatchScore(index, subIndex, teams)}>
+                      {match}
+                    </td>)
                 })}
               </tr> )}
           </tbody>

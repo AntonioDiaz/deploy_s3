@@ -5,7 +5,7 @@ export default class ButtonBackToHome extends Component {
     render() {
         return (                
         <Link 
-            className='button is-info'
+            className='button is-warning'
             to="/">
                 volver a la portada
         </Link>      

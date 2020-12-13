@@ -54,13 +54,13 @@ export class Dashboard extends Component {
           <table className="table is-striped is-bordered is-hoverable is-dark center  is-family-monospace is-size-7-mobile">
           <thead>
             <tr key={-1}>
-              <th>-</th>
+              <th>&nbsp;</th>
               {teams.map((e, index) => <th key={index}>{this.formatTeamName(e)}</th> )}
             </tr>
           </thead>
           <tbody>
               {matches.map((matchesSubArray, index) => <tr key={index}>
-              <td key={-1}>{this.teamsName(index, teams)}</td>
+              <td key={-1} className="has-text-weight-bold">{this.teamsName(index, teams)}</td>
                 {matchesSubArray.map((match, subIndex)=>{ 
                   return (
                     <td key={subIndex} onDoubleClick={()=>this.updateMatchScore(index, subIndex, teams)}>
@@ -87,7 +87,7 @@ export class Dashboard extends Component {
   renderClassificationItem(classification, teams) {
     let table = classification.map((e, index) =>
     <tr key={index}>
-      <td>{this.teamsName(e.id, teams)}</td>
+      <td className="has-text-weight-bold">{this.teamsName(e.id, teams)}</td>
       <td>{e.played}</td>
       <td>{e.wins}</td>      
       <td>{e.lost}</td>            
@@ -106,7 +106,7 @@ export class Dashboard extends Component {
         <table className="table is-striped is-bordered is-hoverable is-dark center  is-family-monospace is-size-7-mobile">
         <thead>
           <tr key={-1}>
-            <th>Pareja</th>
+            <th>&nbsp;</th>
             <th>Partidos Jugados</th>
             <th>Partidos Ganados</th>
             <th>Partidos Perdidos</th>
@@ -128,7 +128,7 @@ export class Dashboard extends Component {
     return (
       <div className="container">
          <div className="notification is-warning">
-            <h1 className="title is-2">XXI Campeonato de Mus. Memorial Los Sordos.</h1>
+            <h2 className="title is-3">XXI Campeonato de Mus - Memorial "Los Sordos"</h2>
          </div>
         <div className="notification is-dark">
           <h2 className='subtitle is-3'>Partidos</h2>

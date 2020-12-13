@@ -50,3 +50,9 @@ table.center {
   margin-left:auto; 
   margin-right:auto;
 }
+
+
+.SearchForm-wrapper {
+  display: flex;
+  justify-content: center;
+}

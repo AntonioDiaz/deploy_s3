@@ -14,13 +14,43 @@ export class Dashboard extends Component {
         })
   }
 
+  renderColumnTeams(teams) {
+    return ""
+  }
+
   renderMatches() {
-    //const {teams, matches} = this.state
-    return <div>Matches</div>
+    const {teams, matches} = this.state
+    if (Array.isArray(teams)) {
+      return (
+        <div className="table-container">
+          <table className="table is-striped is-bordered is-hoverable is-dark center  is-family-monospace is-size-7-mobile">
+          <thead>
+            <tr key={-1}>
+              <th>-</th>
+              {teams.map((e, index) => <th>{this.formatTeamName(e)}</th> )}
+            </tr>
+          </thead>
+          <tbody>
+              {matches.map((matchesSubArray, index) => <tr key={index}>
+              <td key={-1}>{this.teamsName(index, teams)}</td>
+                {matchesSubArray.map((match, subIndex)=>{ 
+                  return <td key={subIndex}>{match}</td>
+                })}
+              </tr> )}
+          </tbody>
+          </table>
+        </div>)
+    } else {
+      return null
+    }
   }
 
   teamsName(teamId, teams) {
-    return teams[teamId].member01 + " - " + teams[teamId].member02
+    return this.formatTeamName(teams[teamId])
+  }
+
+  formatTeamName(team) {
+    return team.member01 + " - " + team.member02
   }
 
   renderClassificationItem(classification, teams) {
@@ -37,11 +67,12 @@ export class Dashboard extends Component {
     return table
   }
 
-
   renderClassification() {
     const {teams, classification } = this.state
     if (Array.isArray(classification)) {
-      return <table className="table is-striped is-bordered is-hoverable is-dark center">
+      return (
+        <div className="table-container">
+        <table className="table is-striped is-bordered is-hoverable is-dark center  is-family-monospace is-size-7-mobile">
         <thead>
           <tr key={-1}>
             <th>Pareja</th>
@@ -56,6 +87,7 @@ export class Dashboard extends Component {
           {this.renderClassificationItem(classification, teams)}
         </tbody>
         </table>
+        </div>)
     } else {
       return <div></div>
     }

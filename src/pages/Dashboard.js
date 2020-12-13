@@ -5,7 +5,7 @@ export class Dashboard extends Component {
   state = {teams: {}, matches: {}, classification: {}}
 
   componentDidMount() {
-    fetch('https://raw.githubusercontent.com/AntonioDiaz/deploy_s3/master/src/test.json')
+    fetch('https://campeonato-mus-json.s3.eu-west-3.amazonaws.com/mus.json')
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -27,21 +27,20 @@ export class Dashboard extends Component {
       var newScore = prompt(msg, "-")
       console.log("newScore " + newScore)
       if (newScore==null || !newScore.match(/^\d-\d$/)) {
-        alert("formato incorrercto")
+        alert("formato incorrecto")
       } else {
         let score01 = newScore.split("-")[0]
         let score02 = newScore.split("-")[1]
         let url = `https://zmq6ovxgw7.execute-api.eu-west-3.amazonaws.com/2020/score?team01=${row}&team02=${column}&score01=${score01}&score02=${score02}`
-        fetch(url, {
-          method: 'POST'
-        })
+        fetch(url)
         .then(response => response.json())
         .then(data => {
-          console.log('Success:', data);
+          console.log('Success:', data)
           alert("Resultado actualizado")
+          window.location.reload(false)
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error('Error:', error)
         });        
       }
     }
@@ -128,13 +127,16 @@ export class Dashboard extends Component {
   render() {
     return (
       <div className="container">
+         <div className="notification is-warning">
+            <h1 className="title is-2">XXI Campeonato de Mus. Memorial Los Sordos.</h1>
+         </div>
         <div className="notification is-dark">
-          <h3 className='title'>Partidos</h3>
+          <h2 className='subtitle is-3'>Partidos</h2>
             {this.renderMatches()}
         </div>
           <br></br>
           <div className="notification is-dark">
-            <h3 className='title'>Clasificación</h3>
+            <h2 className='subtitle is-3'>Clasificación</h2>
             <div className="box has-text-centered">
               {this.renderClassification()}
               </div> 

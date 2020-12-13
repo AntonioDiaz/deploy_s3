@@ -6,22 +6,36 @@ class TeamsList extends Component {
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({
-            num_teams: parseInt(nextProps.num_parejas)
+            num_teams: parseInt(nextProps.num_parejas===""?0:nextProps.num_parejas)
         })
     }
 
     render() {
         console.log("render numero parejas" + this.state.num_teams);
+        if (this.state.num_teams==null || this.state.num_teams===0)
+            return ""
         var myArray = Array.from(Array(this.state.num_teams).keys())
-        console.log(myArray.length)
-        return myArray.map((e, index) => {return <div key={index}>Pareja {index}</div>})
+        return myArray.map((e, index) => {
+            return (
+                <div key={index}>
+                    Pareja {index +1} 
+                    <div className="control">
+                        <input className="input is-primary" type="text" placeholder="componente01"
+                            value={this.state.num_parejas} name="member">
+                            </input>
+                        <input className="input is-primary" type="text" placeholder="componente02"
+                            value={this.state.num_parejas} name="member">
+                            </input>                            
+                    </div>
+                </div>)
+        })
         
     }
 }
 
 export class Init extends Component {
     state = {
-        num_parejas: 10,
+        num_parejas: 5,
         parejas: []
     }
 
@@ -32,13 +46,19 @@ export class Init extends Component {
 
     _handleSubmit = (e) => {
         e.preventDefault()
-        alert('submit')
+        let namesList = Array.from(document.getElementsByName("member")).map(x => x.value).filter(x=>x!=="")
+        if (namesList.length!==this.state.num_parejas*2) {
+            alert ("faltan nombres")
+            return
+        }
+
+        alert('submit ')
     }
 
     render() {
         return (
         <div>
-            <h2 className='title'>Inicializa Campeonato</h2>
+            <h2 className='title'>Crear Campeonato</h2>
             <div className='SearchForm-wrapper'>
             <form onSubmit={this._handleSubmit}>
                 <div className="field">

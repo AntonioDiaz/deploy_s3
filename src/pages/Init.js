@@ -11,7 +11,6 @@ class TeamsList extends Component {
     }
 
     render() {
-        console.log("render numero parejas" + this.state.num_teams);
         if (this.state.num_teams==null || this.state.num_teams===0)
             return ""
         var myArray = Array.from(Array(this.state.num_teams).keys())
@@ -29,7 +28,6 @@ class TeamsList extends Component {
                     </div>
                 </div>)
         })
-        
     }
 }
 
@@ -40,21 +38,44 @@ export class Init extends Component {
     }
 
     _handleChange = (e) => {
-        console.log("handleChange -> " + e.target.value);
         this.setState({num_parejas: e.target.value})
     }
 
     _handleSubmit = (e) => {
         e.preventDefault()
+        let numParejas = this.state.num_parejas;
+        let parejas = [];
         let namesList = Array.from(document.getElementsByName("member")).map(x => x.value).filter(x=>x!=="")
-        if (namesList.length!==this.state.num_parejas*2) {
+        if (namesList.length!==numParejas*2) {
             alert ("faltan nombres")
-            return
+        } else {
+            for (let i = 0; i < numParejas; i++) {
+                parejas.push({member01: namesList[i], member02: namesList[i+1]})
+            }
+            const data = {num_parejas: numParejas, parejas: parejas}
+            fetch('https://zmq6ovxgw7.execute-api.eu-west-3.amazonaws.com/2020/init', {
+                method: 'POST', 
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },                
+                body: JSON.stringify(data)
+              })
+              .then(response => {
+                  console.log("status" + response.status);
+                return response.status
+              })
+              .then(data => {
+                console.log('Success:', data);
+                alert("Se creo el campeonato")
+                window.open("/");
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
         }
-
-        alert('submit ')
     }
-
+    
     render() {
         return (
         <div>

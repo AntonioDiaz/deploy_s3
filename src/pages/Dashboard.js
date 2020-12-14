@@ -67,10 +67,16 @@ export class Dashboard extends Component {
               {matches.map((matchesSubArray, index) => <tr key={index}>
               <td key={-1} className="has-text-weight-bold">{this.teamsName(index, teams)}</td>
                 {matchesSubArray.map((match, subIndex)=>{ 
+                  if (index<subIndex)
+                    return (
+                      <td className="is-warning" key={subIndex} onDoubleClick={()=>this.updateMatchScore(index, subIndex, teams)}>
+                        {match}
+                      </td>)
                   return (
-                    <td key={subIndex} onDoubleClick={()=>this.updateMatchScore(index, subIndex, teams)}>
-                      {match}
+                    <td key={subIndex}>
+                      -
                     </td>)
+
                 })}
               </tr> )}
           </tbody>

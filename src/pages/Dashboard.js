@@ -6,7 +6,14 @@ export class Dashboard extends Component {
   state = {teams: {}, matches: {}, classification: {}}
 
   componentDidMount() {
-    fetch(Constants.JSON_CAMPEONATO)
+    var myHeaders = new Headers();
+    myHeaders.append('pragma', 'no-cache')
+    myHeaders.append('cache-control', 'no-cache');
+    var myInit = {
+      method: 'GET',
+      headers: myHeaders,
+    };    
+    fetch(new Request(Constants.JSON_CAMPEONATO), myInit)
         .then(res => res.json())
         .then(data => {
             console.log(data)

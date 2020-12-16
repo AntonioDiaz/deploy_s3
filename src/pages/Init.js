@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import ButtonBackToHome from '../components/ButtonBackToHome'
+import * as Constants from '../constants'
 
 class TeamsList extends Component {
     state = {num_teams: this.props.num_parejas}
@@ -53,7 +54,7 @@ export class Init extends Component {
                 parejas.push({member01: namesList[i], member02: namesList[i+1]})
             }
             const data = {num_parejas: numParejas, parejas: parejas}
-            fetch('https://zmq6ovxgw7.execute-api.eu-west-3.amazonaws.com/2020/init', {
+            fetch(Constants.URL_LAMBDA_INIT, {
                 method: 'POST', 
                 headers: {
                     "Content-Type": "application/json",

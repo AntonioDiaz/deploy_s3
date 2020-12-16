@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import * as Constants from '../constants'
 
 export class Dashboard extends Component {
 
   state = {teams: {}, matches: {}, classification: {}}
 
   componentDidMount() {
-    fetch('https://campeonato-mus-json.s3.eu-west-3.amazonaws.com/mus.json')
+    fetch(Constants.JSON_CAMPEONATO)
         .then(res => res.json())
         .then(data => {
             console.log(data)
@@ -35,7 +36,7 @@ export class Dashboard extends Component {
           score01 = newScore.split("-")[0]
           score02 = newScore.split("-")[1]
         }
-        let url = `https://zmq6ovxgw7.execute-api.eu-west-3.amazonaws.com/2020/score?team01=${row}&team02=${column}&score01=${score01}&score02=${score02}`
+        let url = Constants.URL_LAMBDA_SCORE + `?team01=${row}&team02=${column}&score01=${score01}&score02=${score02}`
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -50,6 +51,10 @@ export class Dashboard extends Component {
     }
   }
 
+  updateTeamName(index, teams) {
+    alert (Constants.JSON_CAMPEONATO)
+  }
+
   renderMatches() {
     const {teams, matches} = this.state
     console.log("teams -->" + teams);
@@ -60,7 +65,9 @@ export class Dashboard extends Component {
           <thead>
             <tr key={-1}>
               <th>&nbsp;</th>
-              {teams.map((e, index) => <th key={index}>{this.formatTeamName(e)}</th> )}
+              {teams.map((e, index) => 
+                <th key={index} onDoubleClick={()=>this.updateTeamName(index, teams)}>{this.formatTeamName(e)}</th> 
+              )}
             </tr>
           </thead>
           <tbody>
@@ -76,7 +83,6 @@ export class Dashboard extends Component {
                     <td key={subIndex}>
                       -
                     </td>)
-
                 })}
               </tr> )}
           </tbody>

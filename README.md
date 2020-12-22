@@ -1,5 +1,7 @@
 # POC: Deploy a React App on AWS S3
 
+![s3-depl](https://github.com/AntonioDiaz/deploy_s3/workflows/s3-depl/badge.svg?branch=master)
+
 ![diagram](https://user-images.githubusercontent.com/725743/102906372-d24ba500-4474-11eb-81d5-aa650c3a91a1.png)
 
 <!-- TOC depthfrom:2 orderedlist:false -->
@@ -16,8 +18,6 @@
 
 
 ## Links
-![s3-depl](https://github.com/AntonioDiaz/deploy_s3/workflows/s3-depl/badge.svg?branch=master)
-
 * Deploy a React app from Github repository to S3: 
   * https://dev.to/nobleobioma/deploy-a-react-app-to-amazon-s3-using-github-actions-51e
   * https://medium.com/@wolovim/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af

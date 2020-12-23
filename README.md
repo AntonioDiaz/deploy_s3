@@ -13,7 +13,7 @@
 - [AWS Lambdas](#aws-lambdas)
   - [InitMusLambdaProxy](#initmuslambdaproxy)
   - [ScoreMusLambdaProxy](#scoremuslambdaproxy)
-
+- [Input JSON](#input-json)
 <!-- /TOC -->
 
 
@@ -288,5 +288,113 @@ function createClasification(matchesArray) {
     return a.wins===b.wins? didBeat(matchesArray, b.id, a.id) : (b.wins - a.wins)
   })
   return classification
+}
+```
+
+## Input JSON
+```json
+{
+  "teamsCount": 5,
+  "teams": [
+    {
+      "member01": "cesar",
+      "member02": "toni"
+    },
+    {
+      "member01": "dani",
+      "member02": "javi"
+    },
+    {
+      "member01": "fermin",
+      "member02": "perico"
+    },
+    {
+      "member01": "kiko",
+      "member02": "manolo"
+    },
+    {
+      "member01": "isasi",
+      "member02": "edu"
+    }
+  ],
+  "matches": [
+    [
+      "*",
+      "-",
+      "-",
+      "-",
+      "-"
+    ],
+    [
+      "*",
+      "*",
+      "-",
+      "-",
+      "-"
+    ],
+    [
+      "*",
+      "*",
+      "*",
+      "-",
+      "-"
+    ],
+    [
+      "*",
+      "*",
+      "*",
+      "*",
+      "-"
+    ],
+    [
+      "*",
+      "*",
+      "*",
+      "*",
+      "*"
+    ]
+  ],
+  "classification": [
+    {
+      "id": 0,
+      "played": 0,
+      "wins": 0,
+      "lost": 0,
+      "points_favor": 0,
+      "points_again": 0
+    },
+    {
+      "id": 1,
+      "played": 0,
+      "wins": 0,
+      "lost": 0,
+      "points_favor": 0,
+      "points_again": 0
+    },
+    {
+      "id": 2,
+      "played": 0,
+      "wins": 0,
+      "lost": 0,
+      "points_favor": 0,
+      "points_again": 0
+    },
+    {
+      "id": 3,
+      "played": 0,
+      "wins": 0,
+      "lost": 0,
+      "points_favor": 0,
+      "points_again": 0
+    },
+    {
+      "id": 4,
+      "played": 0,
+      "wins": 0,
+      "lost": 0,
+      "points_favor": 0,
+      "points_again": 0
+    }
+  ]
 }
 ```
